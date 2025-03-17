@@ -1,12 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<link rel="manifest" href="%sveltekit.assets%/manifest.json" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#4a90e2" />
+		<meta name="description" content="AsciiNote - " />
+		<link rel="apple-touch-icon" href="%sveltekit.assets%/icon-192x192.png" />
 		%sveltekit.head%
 	</head>
-	<body data-sveltekit-preload-data="hover">
-		<div>%sveltekit.body%</div>
+	<body data-sveltekit-preload-data="hover" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+		<div class="contents">%sveltekit.body%</div>
 	</body>
 </html>
