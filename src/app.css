@@ -1,5 +1,8 @@
 @import "tailwindcss";
+@import '$lib/styles/asciidoc.css';
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant light (&:where([data-theme=light], [data-theme=light] *));
 
 /* Variables CSS globales */
 :root {
@@ -7,6 +10,7 @@
   --background: #ffffff;
   --secondary: #ff4d4f;
 }
+
 
 .text-primary {
   color: var(--primary);
@@ -24,4 +28,15 @@
   --tw-gradient-from: var(--primary) var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+*, *::before, *::after {
+  transition: background-color 0.3s ease,
+  color 0.3s ease,
+  border-color 0.3s ease,
+  box-shadow 0.3s ease;
+}
+
+.no-transition {
+  transition: none !important;
 }

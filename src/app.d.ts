@@ -10,4 +10,17 @@ declare global {
 	}
 }
 
+declare module '$service-worker' {
+	export const build: string[];
+	export const files: string[];
+	export const version: string;
+}
+
+declare namespace NodeJS {
+	interface ProcessEnv {
+		MONGODB_URI: string;
+	}
+}
+
+
 export {};
