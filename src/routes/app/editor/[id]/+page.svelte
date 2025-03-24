@@ -19,7 +19,6 @@
 
     let viewMode = 'edit'; // 'edit', 'preview', 'split'
 
-
     // Variables d'état
     let loading = true;
     let error = null;
@@ -31,21 +30,28 @@
     let contentChanged = false;
     let autoSaveEnabled = true;
 
-    // ID de la note depuis l'URL
-    const noteId = $page.params.id === 'new' ? uuidv4() : $page.params.id;
+    $: noteId = $page.params.id === 'new' ? uuidv4() : $page.params.id;
+
+    $: if (noteId) {
+        loadNote(noteId);
+    }
 
     // Chargement de la note
-    onMount(async () => {
-        if ($page.params.id !== 'new') {
+    async function loadNote(id) {
+        loading = true;
+        titleChanged = false;
+        contentChanged = false;
+
+        if (id !== 'new') {
             try {
-                const response = await fetch(`/api/notes/${noteId}`);
+                const response = await fetch(`/api/notes/${id}`);
 
                 if (response.ok) {
                     note = await response.json();
                 } else if (response.status === 404) {
                     // Si la note n'existe pas, on crée une nouvelle note avec l'ID fourni
                     note = {
-                        id: noteId,
+                        id: id,
                         title: 'Nouvelle note',
                         content: '',
                         createdAt: new Date().toISOString(),
@@ -62,10 +68,18 @@
                 loading = false;
             }
         } else {
-            note.id = noteId;
+            note = {
+                id: id,
+                title: 'Nouvelle note',
+                content: '',
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString(),
+                syncStatus: 'pending',
+                lastSynced: null
+            };
             loading = false;
         }
-    });
+    }
 
     // Nettoyage des timeouts
     onDestroy(() => {
@@ -130,9 +144,14 @@
 
         if (autoSaveEnabled) {
             if (saveTimeout) clearTimeout(saveTimeout);
-            saveTimeout = setTimeout(saveNote, 2000);
+            saveTimeout = setTimeout(() => {
+                if (contentChanged || titleChanged) {
+                    saveNote();
+                }
+            }, 2000);
         }
     }
+
 
     function handleTitleChange() {
         titleChanged = true;
