@@ -172,7 +172,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
             </button>
-            <h1 class="text-2xl font-bold text-gray-800">
+            <h1 class="text-2xl font-bold text-black dark:text-gray-300">
                 {$page.params.id === 'new' ? 'Nouvelle note' : 'Éditer la note'}
             </h1>
         </div>
@@ -184,7 +184,7 @@
                         bind:checked={autoSaveEnabled}
                         class="form-checkbox h-5 w-5 text-blue-600"
                 >
-                <span class="ml-2 text-sm text-gray-700">Auto-save</span>
+                <span class="ml-2 text-sm text-black dark:text-gray-300">Auto-save</span>
             </label>
 
             <button

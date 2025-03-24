@@ -7,11 +7,7 @@
     import { quintOut } from 'svelte/easing';
     import SyncStatus from "$lib/components/SyncStatus.svelte";
 
-
-
-
     let isSidebarOpen = $state(true);
-
 
     function handleToggleSidebar() {
         isSidebarOpen = !isSidebarOpen;
@@ -19,13 +15,15 @@
 
     function handleToggleTheme() {
         theme.toggleTheme();
+    }
 
+    function handleNewNote() {
+        goto('/app/editor/new');
     }
 
     const user = { name: 'Jean Dupont', avatar: null };
 
     let { children } = $props();
-
 </script>
 
 <SyncStatus />
@@ -40,18 +38,13 @@
         onSearch={(query) => console.log('Recherche:', query)}
 />
 
-
-
-
-<div class="flex h-screen"> <!-- Utiliser h-screen au lieu de h-[calc(100vh-4rem)] -->
-
+<div class="flex h-screen">
     {#if isSidebarOpen}
         <aside
                 class="sidebar w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 pt-16"
                 transition:fly={{ x: -300, duration: 300, easing: quintOut }}
         >
             <div class="h-full px-3 py-4 overflow-y-auto">
-
                 <ul class="space-y-2 font-medium">
                     <li>
                         <a href="/app/dashboard" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -66,14 +59,7 @@
         </aside>
     {/if}
 
-
-
-
-    <main class="relative w-full overflow-y-auto bg-gray-50 dark:bg-gray-900 p-4 pt-16">
+    <main class="relative w-full overflow-y-auto bg-gray-50 dark:bg-gray-900 p-4 pt-16 text-gray-900 dark:text-gray-100">
         {@render children()}
     </main>
 </div>
-
-
-<style>
-</style>

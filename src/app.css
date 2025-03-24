@@ -32,11 +32,48 @@
 
 *, *::before, *::after {
   transition: background-color 0.3s ease,
-  color 0.3s ease,
+  color 0.1s ease,
   border-color 0.3s ease,
   box-shadow 0.3s ease;
 }
 
 .no-transition {
   transition: none !important;
+}
+
+/* Transition du thème */
+.theme-transitioning {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Styles spécifiques pour le mode sombre */
+.dark .prose {
+  color: #e2e8f0;
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6 {
+  color: #f8fafc;
+}
+
+.dark .prose a {
+  color: #93c5fd;
+}
+
+.dark .prose strong {
+  color: #f8fafc;
+}
+
+.dark .prose code {
+  color: #f8fafc;
+  background-color: #374151;
+}
+
+.dark .prose blockquote {
+  color: #cbd5e1;
+  border-left-color: #475569;
 }
